@@ -3,110 +3,437 @@
 <head>
     <meta charset="UTF-8">
     <title>Котейка — зоомагазин</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background: #f5f3ff;
-            color: #2d1b4e;
-            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0f;
+            color: #ffffff;
+            line-height: 1.7;
+            overflow-x: hidden;
         }
+
+        /* ============ АНИМИРОВАННЫЙ ФОН ============ */
+        .bg-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: #667eea;
+            top: -200px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 600px;
+            height: 600px;
+            background: #764ba2;
+            top: 30%;
+            right: -200px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: #f093fb;
+            bottom: -100px;
+            left: 30%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-50px, 50px) scale(0.9); }
+        }
+
+        /* ============ ШАПКА ============ */
         header {
-            background: linear-gradient(135deg, #7c3aed, #a855f7);
-            color: white;
-            padding: 60px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             text-align: center;
+            padding: 40px 24px;
+            position: relative;
         }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 32px;
+            animation: fadeInDown 1s ease;
+        }
+
         header h1 {
-            font-size: 48px;
-            margin: 0;
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(60px, 12vw, 140px);
+            font-weight: 900;
+            line-height: 0.95;
+            letter-spacing: -4px;
+            background: linear-gradient(135deg, #ffffff 0%, #a5b4fc 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 24px;
+            animation: fadeInUp 1s ease 0.2s both;
         }
+
+        header p {
+            font-size: clamp(18px, 2vw, 24px);
+            color: rgba(255,255,255,0.7);
+            font-weight: 300;
+            max-width: 600px;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.4);
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============ ТОВАРЫ ============ */
         .products {
-            max-width: 1100px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 120px 24px;
         }
-        .products h2 {
+
+        .section-label {
+            font-size: 14px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #a5b4fc;
             text-align: center;
-            font-size: 36px;
-            color: #7c3aed;
+            margin-bottom: 16px;
+            font-weight: 500;
         }
+
+        .products h2 {
+            font-family: 'Unbounded', sans-serif;
+            text-align: center;
+            font-size: clamp(36px, 6vw, 72px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            color: #ffffff;
+            margin-bottom: 80px;
+            line-height: 1;
+        }
+
         .product-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
         }
+
         .product-card {
-            background: white;
-            border-radius: 16px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.1);
+            background: rgba(255,255,255,0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 32px;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
         }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(165,180,252,0.5), transparent);
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-12px);
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(165,180,252,0.3);
+            box-shadow: 0 20px 60px rgba(102,126,234,0.2);
+        }
+
+        .product-card:hover::before {
+            opacity: 1;
+        }
+
+        .product-emoji {
+            font-size: 48px;
+            margin-bottom: 24px;
+            display: block;
+            filter: drop-shadow(0 0 20px rgba(165,180,252,0.3));
+        }
+
         .product-card h3 {
-            color: #7c3aed;
+            font-family: 'Unbounded', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
-        .price {
-            font-size: 24px;
-            font-weight: bold;
-            color: #a855f7;
+
+        .product-card p {
+            color: rgba(255,255,255,0.5);
+            font-size: 15px;
+            margin-bottom: 24px;
+            line-height: 1.6;
         }
+
+        .product-card .price {
+            font-family: 'Unbounded', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #a5b4fc, #f093fb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        /* ============ КОНТАКТЫ ============ */
         .contacts {
-            background: white;
-            padding: 60px 20px;
+            padding: 120px 24px;
             text-align: center;
+            position: relative;
         }
+
         .contacts h2 {
-            color: #7c3aed;
+            font-family: 'Unbounded', sans-serif;
+            font-size: clamp(36px, 6vw, 72px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #ffffff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 64px;
+            line-height: 1;
         }
-        footer {
-            background: #2d1b4e;
+
+        .contact-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 20px 40px;
+            border-radius: 100px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
+            box-shadow: 0 10px 30px rgba(102,126,234,0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(102,126,234,0.6);
+        }
+
+        .btn-secondary {
+            background: rgba(255,255,255,0.05);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.15);
+            backdrop-filter: blur(20px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-3px);
+        }
+
+        /* ============ ПОДВАЛ ============ */
+        footer {
+            padding: 60px 24px 40px;
             text-align: center;
-            padding: 30px;
+            color: rgba(255,255,255,0.3);
+            font-size: 14px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* ============ АНИМАЦИЯ ПРИ СКРОЛЛЕ ============ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ============ МОБИЛЬНЫЕ ============ */
+        @media (max-width: 768px) {
+            .products, .contacts {
+                padding: 80px 20px;
+            }
+            .product-card {
+                padding: 24px;
+            }
+            .btn {
+                padding: 16px 32px;
+                font-size: 15px;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- ФОН -->
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- ШАПКА -->
     <header>
-        <h1>🐱 Котейка</h1>
+        <div class="logo">Москва • Зоомагазин</div>
+        <h1>Котейка</h1>
         <p>Корм и игрушки для ваших любимцев</p>
+        <div class="scroll-hint">↓ листай вниз</div>
     </header>
 
+    <!-- ТОВАРЫ -->
     <section class="products">
-        <h2>Наши товары</h2>
+        <div class="section-label">Что у нас есть</div>
+        <h2>Товары</h2>
         <div class="product-grid">
-            <div class="product-card">
+            <div class="product-card reveal">
+                <span class="product-emoji">🐱</span>
                 <h3>Корм для кошек</h3>
-                <p>Вкусный и полезный</p>
+                <p>Вкусный и полезный корм для взрослых кошек</p>
                 <p class="price">500 ₽</p>
             </div>
-            <div class="product-card">
+            <div class="product-card reveal">
+                <span class="product-emoji">🐶</span>
                 <h3>Корм для собак</h3>
-                <p>Для активных пёсиков</p>
+                <p>Сбалансированное питание для активных пёсиков</p>
                 <p class="price">700 ₽</p>
             </div>
-            <div class="product-card">
+            <div class="product-card reveal">
+                <span class="product-emoji">🧶</span>
                 <h3>Игрушка «Мышка»</h3>
-                <p>Любимая забава кота</p>
+                <p>Мягкая и безопасная — любимая забава кота</p>
                 <p class="price">200 ₽</p>
             </div>
-            <div class="product-card">
+            <div class="product-card reveal">
+                <span class="product-emoji">🎾</span>
                 <h3>Мячик для собаки</h3>
-                <p>Прочный, для игры</p>
+                <p>Прочный — для активных игр на улице</p>
                 <p class="price">300 ₽</p>
             </div>
         </div>
     </section>
 
+    <!-- КОНТАКТЫ -->
     <section class="contacts">
-        <h2>Свяжитесь с нами</h2>
-        <p>Telegram: <a href="https://t.me/username">@username</a></p>
-        <p>Телефон: <a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
+        <h2>Свяжитесь<br>с нами</h2>
+        <div class="contact-buttons">
+            <a href="https://t.me/username" class="btn btn-primary">
+                <span>✈</span> Написать в Telegram
+            </a>
+            <a href="tel:+79991234567" class="btn btn-secondary">
+                <span>📞</span> +7 (999) 123-45-67
+            </a>
+        </div>
     </section>
 
+    <!-- ПОДВАЛ -->
     <footer>
         <p>© 2026 Котейка — зоомагазин</p>
     </footer>
+
+    <!-- СКРИПТ АНИМАЦИИ -->
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('active');
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        reveals.forEach(reveal => observer.observe(reveal));
+    </script>
 
 </body>
 </html>
