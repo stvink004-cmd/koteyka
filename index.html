@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Котейка — зоомагазин</title>
+    <title>Котейка — зоомагазин в Свердловске</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* ============ АНИМИРОВАННЫЙ ФОН ============ */
+        /* ============ ФОН ============ */
         .bg-orbs {
             position: fixed;
             top: 0;
@@ -43,37 +43,81 @@
             animation: float 20s ease-in-out infinite;
         }
 
-        .orb-1 {
-            width: 500px;
-            height: 500px;
-            background: #667eea;
-            top: -200px;
-            left: -100px;
-            animation-delay: 0s;
-        }
-
-        .orb-2 {
-            width: 600px;
-            height: 600px;
-            background: #764ba2;
-            top: 30%;
-            right: -200px;
-            animation-delay: -5s;
-        }
-
-        .orb-3 {
-            width: 400px;
-            height: 400px;
-            background: #f093fb;
-            bottom: -100px;
-            left: 30%;
-            animation-delay: -10s;
-        }
+        .orb-1 { width: 500px; height: 500px; background: #667eea; top: -200px; left: -100px; }
+        .orb-2 { width: 600px; height: 600px; background: #764ba2; top: 30%; right: -200px; animation-delay: -5s; }
+        .orb-3 { width: 400px; height: 400px; background: #f093fb; bottom: -100px; left: 30%; animation-delay: -10s; }
 
         @keyframes float {
             0%, 100% { transform: translate(0, 0) scale(1); }
             33% { transform: translate(50px, -50px) scale(1.1); }
             66% { transform: translate(-50px, 50px) scale(0.9); }
+        }
+
+        /* ============ НАВИГАЦИЯ ============ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(10, 10, 15, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 16px 24px;
+        }
+
+        .nav-content {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Unbounded', sans-serif;
+            font-weight: 800;
+            font-size: 20px;
+            color: #ffffff;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
         }
 
         /* ============ ШАПКА ============ */
@@ -84,16 +128,15 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 40px 24px;
-            position: relative;
+            padding: 120px 24px 40px;
         }
 
         .logo {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 600;
             letter-spacing: 4px;
             text-transform: uppercase;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.5);
             margin-bottom: 32px;
             animation: fadeInDown 1s ease;
         }
@@ -123,18 +166,16 @@
         .scroll-hint {
             position: absolute;
             bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
             color: rgba(255,255,255,0.4);
-            font-size: 14px;
+            font-size: 13px;
             letter-spacing: 2px;
             text-transform: uppercase;
             animation: bounce 2s infinite;
         }
 
         @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(-10px); }
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         @keyframes fadeInUp {
@@ -147,31 +188,68 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ============ ТОВАРЫ ============ */
-        .products {
+        /* ============ КАТЕГОРИИ ============ */
+        .categories {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 40px 24px 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .category-btn {
+            padding: 12px 24px;
+            border-radius: 100px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.8);
+            font-size: 15px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            backdrop-filter: blur(20px);
+        }
+
+        .category-btn:hover {
+            background: rgba(102,126,234,0.2);
+            border-color: rgba(102,126,234,0.5);
+            color: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        /* ============ СЕКЦИИ ============ */
+        .section {
             max-width: 1300px;
             margin: 0 auto;
-            padding: 120px 24px;
+            padding: 100px 24px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 64px;
         }
 
         .section-label {
-            font-size: 14px;
+            font-size: 13px;
             letter-spacing: 4px;
             text-transform: uppercase;
             color: #a5b4fc;
-            text-align: center;
             margin-bottom: 16px;
             font-weight: 500;
         }
 
-        .products h2 {
+        .section h2 {
             font-family: 'Unbounded', sans-serif;
-            text-align: center;
-            font-size: clamp(36px, 6vw, 72px);
+            font-size: clamp(32px, 5vw, 64px);
             font-weight: 800;
             letter-spacing: -2px;
-            color: #ffffff;
-            margin-bottom: 80px;
+            background: linear-gradient(135deg, #ffffff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             line-height: 1;
         }
 
@@ -191,7 +269,6 @@
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            cursor: pointer;
         }
 
         .product-card::before {
@@ -226,7 +303,7 @@
 
         .product-card h3 {
             font-family: 'Unbounded', sans-serif;
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
             color: #ffffff;
             margin-bottom: 12px;
@@ -242,7 +319,7 @@
 
         .product-card .price {
             font-family: 'Unbounded', sans-serif;
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 800;
             background: linear-gradient(135deg, #a5b4fc, #f093fb);
             -webkit-background-clip: text;
@@ -251,16 +328,42 @@
             letter-spacing: -1px;
         }
 
+        /* ============ ДОСТАВКА ============ */
+        .delivery-card {
+            text-align: center;
+            padding: 64px 32px;
+            grid-column: 1 / -1;
+        }
+
+        .delivery-card .product-emoji {
+            font-size: 72px;
+        }
+
+        .delivery-card h3 {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .delivery-card .price {
+            font-size: 48px;
+            margin-top: 16px;
+        }
+
+        .delivery-note {
+            font-size: 14px;
+            color: rgba(255,255,255,0.4);
+            margin-top: 16px;
+        }
+
         /* ============ КОНТАКТЫ ============ */
         .contacts {
-            padding: 120px 24px;
+            padding: 100px 24px;
             text-align: center;
-            position: relative;
         }
 
         .contacts h2 {
             font-family: 'Unbounded', sans-serif;
-            font-size: clamp(36px, 6vw, 72px);
+            font-size: clamp(32px, 5vw, 64px);
             font-weight: 800;
             letter-spacing: -2px;
             background: linear-gradient(135deg, #ffffff, #a5b4fc);
@@ -324,7 +427,7 @@
             border-top: 1px solid rgba(255,255,255,0.05);
         }
 
-        /* ============ АНИМАЦИЯ ПРИ СКРОЛЛЕ ============ */
+        /* ============ АНИМАЦИЯ ============ */
         .reveal {
             opacity: 0;
             transform: translateY(60px);
@@ -338,8 +441,14 @@
 
         /* ============ МОБИЛЬНЫЕ ============ */
         @media (max-width: 768px) {
-            .products, .contacts {
-                padding: 80px 20px;
+            .nav-links {
+                display: none;
+            }
+            .nav-content {
+                justify-content: center;
+            }
+            .section, .contacts {
+                padding: 60px 20px;
             }
             .product-card {
                 padding: 24px;
@@ -348,30 +457,55 @@
                 padding: 16px 32px;
                 font-size: 15px;
             }
+            .categories {
+                padding: 30px 20px 0;
+            }
+            .delivery-card {
+                padding: 40px 24px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- ФОН -->
     <div class="bg-orbs">
         <div class="orb orb-1"></div>
         <div class="orb orb-2"></div>
         <div class="orb orb-3"></div>
     </div>
 
-    <!-- ШАПКА -->
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="nav-logo">Котейка</a>
+            <ul class="nav-links">
+                <li><a href="#food">Корм</a></li>
+                <li><a href="#toys">Игрушки</a></li>
+                <li><a href="#beds">Лежанки</a></li>
+                <li><a href="#delivery">Доставка</a></li>
+                <li><a href="#contacts">Контакты</a></li>
+            </ul>
+        </div>
+    </nav>
+
     <header>
-        <div class="logo">Свердловск • Зоомагазин</div>
+        <div class="logo">Свердловск • ЛНР • Зоомагазин</div>
         <h1>Котейка</h1>
-        <p>Корм и игрушки для ваших любимцев</p>
+        <p>Корм, игрушки и лежанки для ваших любимцев</p>
         <div class="scroll-hint">↓ листай вниз</div>
     </header>
 
-    <!-- ТОВАРЫ -->
-    <section class="products">
-        <div class="section-label">Что у нас есть</div>
-        <h2>Товары</h2>
+    <div class="categories">
+        <a href="#food" class="category-btn">🍖 Корм</a>
+        <a href="#toys" class="category-btn">🧸 Игрушки</a>
+        <a href="#beds" class="category-btn">🛏 Лежанки</a>
+        <a href="#delivery" class="category-btn">🚚 Доставка</a>
+    </div>
+
+    <section class="section" id="food">
+        <div class="section-header">
+            <div class="section-label">Для здоровья</div>
+            <h2>Корм</h2>
+        </div>
         <div class="product-grid">
             <div class="product-card reveal">
                 <span class="product-emoji">🐱</span>
@@ -386,6 +520,21 @@
                 <p class="price">700 ₽</p>
             </div>
             <div class="product-card reveal">
+                <span class="product-emoji">🐹</span>
+                <h3>Корм для грызунов</h3>
+                <p>Для хомяков, морских свинок и кроликов</p>
+                <p class="price">350 ₽</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="toys">
+        <div class="section-header">
+            <div class="section-label">Для игр</div>
+            <h2>Игрушки</h2>
+        </div>
+        <div class="product-grid">
+            <div class="product-card reveal">
                 <span class="product-emoji">🧶</span>
                 <h3>Игрушка «Мышка»</h3>
                 <p>Мягкая и безопасная — любимая забава кота</p>
@@ -397,11 +546,60 @@
                 <p>Прочный — для активных игр на улице</p>
                 <p class="price">300 ₽</p>
             </div>
+            <div class="product-card reveal">
+                <span class="product-emoji">🪶</span>
+                <h3>Удочка с пером</h3>
+                <p>Для активных игр с кошками</p>
+                <p class="price">250 ₽</p>
+            </div>
         </div>
     </section>
 
-    <!-- КОНТАКТЫ -->
-    <section class="contacts">
+    <section class="section" id="beds">
+        <div class="section-header">
+            <div class="section-label">Для уюта</div>
+            <h2>Лежанки</h2>
+        </div>
+        <div class="product-grid">
+            <div class="product-card reveal">
+                <span class="product-emoji">🛏</span>
+                <h3>Лежанка для кошки</h3>
+                <p>Мягкая, тёплая — идеальна для сна</p>
+                <p class="price">1200 ₽</p>
+            </div>
+            <div class="product-card reveal">
+                <span class="product-emoji">🏠</span>
+                <h3>Домик для кота</h3>
+                <p>Уютный домик из мягкого материала</p>
+                <p class="price">1800 ₽</p>
+            </div>
+            <div class="product-card reveal">
+                <span class="product-emoji">🦴</span>
+                <h3>Лежак для собаки</h3>
+                <p>Большой и удобный — для средних пород</p>
+                <p class="price">1500 ₽</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ДОСТАВКА -->
+    <section class="section" id="delivery">
+        <div class="section-header">
+            <div class="section-label">Как получить</div>
+            <h2>Доставка</h2>
+        </div>
+        <div class="product-grid">
+            <div class="product-card delivery-card reveal">
+                <span class="product-emoji">🚚</span>
+                <h3>Доставка по ЛНР</h3>
+                <p>Быстрая и надёжная доставка по всей Луганской Народной Республике</p>
+                <p class="price">500 ₽</p>
+                <p class="delivery-note">Срок доставки: 1–3 дня</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contacts" id="contacts">
         <h2>Свяжитесь<br>с нами</h2>
         <div class="contact-buttons">
             <a href="https://t.me/username" class="btn btn-primary">
@@ -413,12 +611,10 @@
         </div>
     </section>
 
-    <!-- ПОДВАЛ -->
     <footer>
-        <p>© 2026 Котейка — зоомагазин</p>
+        <p>© 2026 Котейка — зоомагазин в Свердловске (ЛНР)</p>
     </footer>
 
-    <!-- СКРИПТ АНИМАЦИИ -->
     <script>
         const reveals = document.querySelectorAll('.reveal');
         
