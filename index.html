@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Котейка — зоомагазин</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f3ff;
+            color: #2d1b4e;
+            margin: 0;
+        }
+        header {
+            background: linear-gradient(135deg, #7c3aed, #a855f7);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 48px;
+            margin: 0;
+        }
+        .products {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+        .products h2 {
+            text-align: center;
+            font-size: 36px;
+            color: #7c3aed;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.1);
+        }
+        .product-card h3 {
+            color: #7c3aed;
+        }
+        .price {
+            font-size: 24px;
+            font-weight: bold;
+            color: #a855f7;
+        }
+        .contacts {
+            background: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .contacts h2 {
+            color: #7c3aed;
+        }
+        footer {
+            background: #2d1b4e;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🐱 Котейка</h1>
+        <p>Корм и игрушки для ваших любимцев</p>
+    </header>
+
+    <section class="products">
+        <h2>Наши товары</h2>
+        <div class="product-grid">
+            <div class="product-card">
+                <h3>Корм для кошек</h3>
+                <p>Вкусный и полезный</p>
+                <p class="price">500 ₽</p>
+            </div>
+            <div class="product-card">
+                <h3>Корм для собак</h3>
+                <p>Для активных пёсиков</p>
+                <p class="price">700 ₽</p>
+            </div>
+            <div class="product-card">
+                <h3>Игрушка «Мышка»</h3>
+                <p>Любимая забава кота</p>
+                <p class="price">200 ₽</p>
+            </div>
+            <div class="product-card">
+                <h3>Мячик для собаки</h3>
+                <p>Прочный, для игры</p>
+                <p class="price">300 ₽</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="contacts">
+        <h2>Свяжитесь с нами</h2>
+        <p>Telegram: <a href="https://t.me/username">@username</a></p>
+        <p>Телефон: <a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
+    </section>
+
+    <footer>
+        <p>© 2026 Котейка — зоомагазин</p>
+    </footer>
+
+</body>
+</html>
